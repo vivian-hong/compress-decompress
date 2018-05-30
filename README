@@ -1,0 +1,59 @@
+README
+Auhors: Erika Odmark and Vivian Hong
+Date: 10/21/16
+HW4
+
+Acknowledgements: 
+
+        TAs gave good advice, Noah helped with some debugging, spec provided
+        code to read header of a compressed image.
+
+Correctly Implmeneted: 
+        To the best of our knowledge and test cases, everything correctly
+        implemented. There are certain pixels that have higher saturation in the
+        original image that become too saturated in the decompressed image, 
+        but after talking to multiple TAs about it, we determined that this
+        is reasonable loss of information. Additionally, ppmdiff shows low
+        differences even when this issue occurs. 
+
+Incorrectly Implmented: 
+        To the best of our knowledge and test cases, nothing is incorrectly 
+        implemented. See caveat above.
+
+Architecture: 
+
+ - 40image uses compress40 and decompress40 modules to compress and decompress 
+   imputted images.
+
+ - compress40 and decompress40 both use the following modules:
+
+           brightness: Translates the brightness of four RGB pixels to and from
+                       a discrete cosine transformed representation of component
+                       video.
+                       
+           chromacity: Translates the brightness of four RGB pixels to and from
+                       a discrete cosine transformed representation of component
+                       video.
+
+           bitpack: Used to store and get the component video representation of
+                    the image.
+
+ - brightness and chromacity use the following modules:
+
+           matrix mult: Does the discrete cosine transform and its inverse.
+
+           convert signed unsigned: Converts floats to and from their signed and
+                                    unsigned representations within specified 
+                                    bounds.
+
+ (note: The decompress struct and compress struct are both used in both
+        decompression and compression. In compress, decompress struct holds
+        info from the original image, and compress struct holds compressed
+        info to store. In decompress, compress struct holds compressed
+        info from the input file, and decompress struct holds the info to be
+        put in the final image.)
+
+
+Hours Analyzing: 6.5 hrs
+
+Hours Solving Problems: 40
